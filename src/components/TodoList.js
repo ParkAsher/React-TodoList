@@ -1,17 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 /* components */
-import TodoListItem from './TodoListItem'
+import TodoListItem from './TodoListItem.js'
 
 import './TodoList.scss';
 
+function TodoList({ todos, onRemove, onToggle }) {
 
-function TodoList() {
+    useEffect(() => {
+        console.log(todos)
+    }, [todos])
+
     return (
         <div className='TodoList'>
-            <TodoListItem></TodoListItem>
-            <TodoListItem></TodoListItem>
-            <TodoListItem></TodoListItem>
+            {
+                todos.map(todo => (
+                    <TodoListItem todo={todo} key={todo.id} onRemove={onRemove} onToggle={onToggle} />
+                ))
+            }
         </div>
     )
 }
