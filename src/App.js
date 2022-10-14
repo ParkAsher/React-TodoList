@@ -10,7 +10,7 @@ function App() {
 
     const [todos, setTodos] = useState([]);
 
-    const nextId = useRef(2);
+    const nextId = useRef(0);
 
     const onInsert = useCallback(text => {
 
@@ -20,22 +20,22 @@ function App() {
             checked: false,
         };
 
-        setTodos(todos.concat(todo))
+        setTodos(todos => todos.concat(todo))
         nextId.current += 1;
 
-    }, [todos])
+    }, [])
 
     const onRemove = useCallback(id => {
 
-        setTodos(todos.filter(todo => todo.id !== id))
+        setTodos(todos => todos.filter(todo => todo.id !== id))
 
-    })
+    }, [])
 
     const onToggle = useCallback(id => {
 
-        setTodos(todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo))
+        setTodos(todos => todos.map(todo => todo.id === id ? { ...todo, checked: !todo.checked } : todo))
 
-    }, [todos])
+    }, [])
 
     return (
         <TodoTemplate>
